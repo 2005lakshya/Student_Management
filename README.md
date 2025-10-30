@@ -33,12 +33,6 @@ A small ASP.NET Core MVC sample demonstrating basic account flows and student re
    - /Account/Sign (Sign -> Form)
    - /Account/Index (requires login)
 
-## Important Security Notes (must include in report)
-- Passwords are currently stored and compared in plaintext (critical security risk). Do not use this code in production.
-- TempData is used to transfer raw passwords between actions — avoid transferring credentials in TempData/session.
-- No role-based authorization or logout action implemented.
-- Do not commit `appsettings.json` with secrets; use Secret Manager or environment variables.
-
 ## Project layout
 - Controllers: `Controllers\HomeController.cs` (AccountController)
 - Models: `Models\FormModel`, `Models\LoginModel`, `Models\SignModel`
