@@ -1,0 +1,132 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - TryMVC</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/TryMVC.styles.css" asp-append-version="true" />
+</head>
+<style>
+    body {
+        background: linear-gradient(135deg, #1a1a1a, #2d2d2d, #1a1a1a);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        margin: 0;
+        padding: 0;
+        color: white
+    }
+
+    header {
+        background-color: rgb(33, 31, 33);
+    }
+
+    .container {
+        flex: 1;
+        padding-bottom: 0;
+    }
+
+    main {
+        padding-bottom: 0 !important;
+    }
+
+    footer {
+        background-color: black;
+        color: white;
+        padding: 1rem 0;
+        margin-top: 0;
+    }
+
+    header .navbar a.nav-link {
+        color: white !important;
+    }
+
+    header .navbar-brand {
+        color: white !important;
+    }
+
+    .profile-container {
+        position: relative;
+    }
+
+    .username-btn {
+        background: transparent;
+        border: 1px solid #ffd700;
+        color: #ffd700;
+        padding: 8px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .dropdown {
+        display: none;
+        position: absolute;
+        right: 0;
+        background: rgb(33, 31, 33);
+        border: 1px solid #ffd700;
+        border-radius: 5px;
+        padding: 10px;
+        margin-top: 5px;
+    }
+
+    .dropdown a {
+        color: #ffd700;
+        text-decoration: none;
+        display: block;
+        padding: 5px 10px;
+    }
+
+    .dropdown a:hover {
+        background: rgba(255, 215, 0, 0.1);
+    }
+</style>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand">Havells</a>
+                <div class="profile-container ms-auto">
+                    <button onclick="toggleDropdown()" class="username-btn">
+                        @Context.Session.GetString("StudentUsername")
+                    </button>
+                    <div class="dropdown" id="dropdownMenu">
+                        <a href="/Account/Login">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2025 - Lakshya
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+    <script>
+        function toggleDropdown() {
+            var dropdown = document.getElementById("dropdownMenu");
+            dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+        }
+
+        document.addEventListener("click", function (event) {
+            var profileContainer = document.querySelector(".profile-container");
+            var dropdown = document.getElementById("dropdownMenu");
+            if (!profileContainer.contains(event.target)) {
+                dropdown.style.display = "none";
+            }
+        });
+    </script>
+</body>
+</html>
